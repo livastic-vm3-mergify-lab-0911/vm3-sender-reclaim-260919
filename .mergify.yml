@@ -1,0 +1,14 @@
+commands_restrictions:
+  queue:
+    conditions:
+      - sender = livastic-vm3-primary-20260911
+queue_rules:
+  - name: VM3 trusted sender recycled-login queue policy
+    queue_conditions:
+      - base = vm3-sender-reclaim-base-260919
+    merge_conditions: []
+    merge_method: merge
+    batch_size: 1
+merge_queue:
+  mode: serial
+  max_parallel_checks: 1
