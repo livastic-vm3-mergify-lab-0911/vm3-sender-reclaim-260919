@@ -9,6 +9,21 @@ queue_rules:
     merge_conditions: []
     merge_method: merge
     batch_size: 1
+  - name: vm3-mq-product-off-finalizer-261007
+    queue_conditions: []
+    merge_conditions:
+      - check-success = vm3-mq-prod-release-261007
+    batch_size: 1
+    batch_max_wait_time: 5 sec
+    merge_method: merge
 merge_queue:
   mode: serial
   max_parallel_checks: 1
+pull_request_rules:
+  - name: vm3 mq product off phase1 261007
+    conditions:
+      - base = vm3-mq-prod-off-base-261007
+      - title = VM3 MQ PRODUCT OFF FINALIZER 261007
+    actions:
+      queue:
+        name: vm3-mq-product-off-finalizer-261007
